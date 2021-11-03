@@ -45,14 +45,17 @@ class App extends Component {
       // contacts: [...prev.contacts.filter(({ name }) => name !== delItem)],
     }));
   };
+  filteredContacts = () => {
+    const { contacts, filter } = this.state;
+    return filter
+      ? contacts.filter(({ name }) => {
+          return name.toLowerCase().includes(filter.toLowerCase());
+        })
+      : contacts;
+  };
+
   render() {
     const { contacts, filter } = this.state;
-    const filteredContacts = () =>
-      filter
-        ? contacts.filter(({ name }) => {
-            return name.toLowerCase().includes(filter.toLowerCase());
-          })
-        : contacts;
     return (
       <div className="App">
         <h1 className={s.title}>Phonebook</h1>
@@ -60,7 +63,7 @@ class App extends Component {
         <h2 className={s.title}>Contacts</h2>
         <Filter handleFilter={this.handleFilter} value={filter} />
         <ContactList
-          contacts={filteredContacts()}
+          contacts={this.filteredContacts()}
           removeItem={this.removeItem}
         />
       </div>
