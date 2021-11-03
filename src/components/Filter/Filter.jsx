@@ -15,4 +15,9 @@ const Filter = ({ handleFilter, value }) => {
   );
 };
 
+Filter.propTypes = {
+  value: PropTypes.string.isRequired,
+  handleFilter: PropTypes.func.isRequired,
+};
+
 export default Filter;

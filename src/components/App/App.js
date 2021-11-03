@@ -1,4 +1,5 @@
 import s from "./App.module.css";
+
 import { Component } from "react";
 import shortid from "shortid";
 
@@ -34,15 +35,21 @@ class App extends Component {
       filter: value,
     });
   };
-  removeItem = ({ target }) => {
-    const delItem = target.closest("LI").firstChild.textContent;
-    // console.log(delItem);
+  removeItem = (id) => {
+    // const delItem = target.closest("LI").firstChild.textContent;
     this.setState((prev) => ({
-      contacts: [...prev.contacts.filter(({ name }) => name !== delItem)],
+      contacts: prev.contacts.filter(({ name }) => name !== id),
+      // contacts: [...prev.contacts.filter(({ name }) => name !== delItem)],
     }));
   };
   render() {
     const { contacts, filter } = this.state;
+    const filteredContacts = () =>
+      filter
+        ? contacts.filter(({ name }) => {
+            return name.toLowerCase().includes(filter.toLowerCase());
+          })
+        : contacts;
     return (
       <div className="App">
         <h1 className={s.title}>Phonebook</h1>
@@ -50,8 +57,7 @@ class App extends Component {
         <h2 className={s.title}>Contacts</h2>
         <Filter handleFilter={this.handleFilter} value={filter} />
         <ContactList
-          contacts={contacts}
-          filter={filter}
+          contacts={filteredContacts()}
           removeItem={this.removeItem}
         />
       </div>

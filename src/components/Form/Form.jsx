@@ -1,7 +1,7 @@
+import s from "./Form.module.css";
+
 import { Component } from "react";
 import PropTypes from "prop-types";
-
-import s from "./Form.module.css";
 
 class Form extends Component {
   state = {
@@ -54,6 +54,8 @@ class Form extends Component {
   }
 }
 
-Form.propTypes = {};
+Form.propTypes = {
+  handleSubmitForm: PropTypes.func.isRequired,
+};
 
 export default Form;
