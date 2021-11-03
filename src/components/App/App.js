@@ -20,7 +20,10 @@ class App extends Component {
   handleSubmitForm = ({ name, number }) => {
     const { contacts } = this.state;
 
-    contacts.some(({ name: contactName }) => contactName === name)
+    contacts.some(
+      ({ name: contactName }) =>
+        contactName.toLocaleLowerCase() === name.toLocaleLowerCase()
+    )
       ? alert(`${name} is already in contacts`)
       : this.setState((prev) => ({
           contacts: [

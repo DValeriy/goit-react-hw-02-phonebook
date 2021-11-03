@@ -18,6 +18,7 @@ class Form extends Component {
     e.preventDefault();
     const { handleSubmitForm } = this.props;
     handleSubmitForm(this.state);
+    this.setState({ name: "", number: "" });
   };
   render() {
     return (
